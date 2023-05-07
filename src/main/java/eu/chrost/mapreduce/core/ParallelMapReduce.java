@@ -58,6 +58,7 @@ public class ParallelMapReduce<I, K, V> implements MapReduce<I, K, V> {
 
     @Override
     public void shutdown() {
+        System.out.println("Shutdown");
         executorService.shutdown();
     }
 }

@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class ForkJoinWordCountBenchmark {
     private MapReduce<String, String, Long> mapReduce;
 
-    @Setup(Level.Trial)
+    @Setup(Level.Iteration)
     public void setup() {
         mapReduce = new ForkJoinMapReduce<>();
     }
@@ -44,7 +44,7 @@ public class ForkJoinWordCountBenchmark {
         blackhole.consume(map);
     }
 
-    @TearDown(Level.Trial)
+    @TearDown(Level.Iteration)
     public void teardown() {
         mapReduce.shutdown();
     }

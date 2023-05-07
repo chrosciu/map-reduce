@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class ParallelWordCountBenchmark {
     private MapReduce<String, String, Long> mapReduce;
 
-    @Setup(Level.Trial)
+    @Setup(Level.Iteration)
     public void setup() {
         mapReduce = new ParallelMapReduce<>();
     }
@@ -44,7 +44,7 @@ public class ParallelWordCountBenchmark {
         blackhole.consume(map);
     }
 
-    @TearDown(Level.Trial)
+    @TearDown(Level.Iteration)
     public void teardown() {
         mapReduce.shutdown();
     }
