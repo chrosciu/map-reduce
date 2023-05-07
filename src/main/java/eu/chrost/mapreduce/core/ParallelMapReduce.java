@@ -12,13 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 
 public class ParallelMapReduce<I, K, V> implements MapReduce<I, K, V> {
-    private final ExecutorService executorService;
-    private final CompletionService<Void> completionService;
-
-    public ParallelMapReduce() {
-        executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        completionService = new ExecutorCompletionService<>(executorService);
-    }
+    private final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    private final CompletionService<Void> completionService = new ExecutorCompletionService<>(executorService);
 
     @Override
     public void run(Iterator<I> input, Mapper<I, K, V> mapper, Reducer<K, V> reducer, BiConsumer<K, V> output) {
