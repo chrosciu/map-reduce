@@ -13,7 +13,7 @@ public final class WordCountMapper implements Mapper<String, String, Long> {
     @Override
     public void map(String in, BiConsumer<String, Long> output) {
         //for (String str : PATTERN.split(in.toLowerCase())) {
-        StringTokenizer tokenizer = new StringTokenizer(in);
+        StringTokenizer tokenizer = new StringTokenizer(in, " \t\n\r\f!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
         while (tokenizer.hasMoreTokens()) {
             String str = tokenizer.nextToken();
             output.accept(str, 1L);
