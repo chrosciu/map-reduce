@@ -2,7 +2,7 @@ package eu.chrost.mapreduce.benchmark;
 
 import eu.chrost.mapreduce.core.BatchingParallelMapReduce;
 import eu.chrost.mapreduce.core.MapReduce;
-import eu.chrost.mapreduce.wordcount.FileLineInput;
+import eu.chrost.mapreduce.wordcount.InputStreamLineIterator;
 import eu.chrost.mapreduce.wordcount.WordCountMapper;
 import eu.chrost.mapreduce.wordcount.WordCountReducer;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -37,7 +37,7 @@ public class BatchingParallelWordCountBenchmark {
     public void run(Blackhole blackhole) {
         HashMap<String, Long> map = new HashMap<>();
         mapReduce.run(
-                new FileLineInput(getClass().getResourceAsStream("/book.txt")),
+                new InputStreamLineIterator(getClass().getResourceAsStream("/book.txt")),
                 new WordCountMapper(),
                 new WordCountReducer(),
                 map::put);
