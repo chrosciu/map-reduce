@@ -3,17 +3,12 @@ package eu.chrost.mapreduce.wordcount;
 import eu.chrost.mapreduce.core.ForkJoinMapReduce;
 import eu.chrost.mapreduce.core.MapReduce;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ForkJoinWordCount {
     public static void main(String[] args) {
-        HashMap<String, Long> map = new HashMap<>();
         MapReduce<String, String, Long> mapReduce = new ForkJoinMapReduce<>();
-        mapReduce.run(
-                new InputStreamLineIterator(BookInputStream.getBookInputStream()),
-                new WordCountMapper(),
-                new WordCountReducer(),
-                map::put);
+        Map<String, Long> map = WordCountMapReduce.run(mapReduce);
         mapReduce.shutdown();
         System.out.println(map);
     }

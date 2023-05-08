@@ -9,7 +9,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class NaiveWordCountBenchmark {
     @Benchmark
@@ -18,7 +18,7 @@ public class NaiveWordCountBenchmark {
     @Fork(1)
     @Measurement(iterations = 1)
     public void run(Blackhole blackhole) {
-        HashMap<String, Long> map = NaiveWordCount.run();
+        Map<String, Long> map = NaiveWordCount.run();
         blackhole.consume(map);
     }
 }

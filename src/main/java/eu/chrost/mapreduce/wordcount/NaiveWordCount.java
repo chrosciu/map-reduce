@@ -2,14 +2,15 @@ package eu.chrost.mapreduce.wordcount;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class NaiveWordCount {
     public static void main(String[] args) {
-        HashMap<String, Long> map = run();
+        Map<String, Long> map = run();
         System.out.println(map);
     }
 
-    public static HashMap<String, Long> run() {
+    public static Map<String, Long> run() {
         HashMap<String, Long> map = new HashMap<>();
         Iterator<String> lines = new InputStreamLineIterator(BookInputStream.getBookInputStream());
         while (lines.hasNext()) {
