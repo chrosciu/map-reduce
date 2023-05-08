@@ -24,15 +24,10 @@ public class NaiveWordCountBenchmark {
         Iterator<String> lines = new FileLineInput(getClass().getResourceAsStream("/book.txt"));
         while (lines.hasNext()) {
             String line = lines.next();
-            StringTokenizer tokenizer = new StringTokenizer(line);
+            StringTokenizer tokenizer = new StringTokenizer(line, " \t\n\r\f!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
             while (tokenizer.hasMoreTokens()) {
                 String str = tokenizer.nextToken();
-                Long count = map.get(str);
-                if (count != null) {
-                    map.put(str, count + 1);
-                } else {
-                    map.put(str, 1L);
-                }
+                map.merge(str, 1L, Long::sum);
             }
         }
         blackhole.consume(map);
