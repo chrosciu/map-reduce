@@ -10,7 +10,7 @@ public class ParallelWordCount {
         HashMap<String, Long> map = new HashMap<>();
         MapReduce<String, String, Long> mapReduce = new ParallelMapReduce<>();
         mapReduce.run(
-                new InputStreamLineIterator(ParallelWordCount.class.getResourceAsStream("/book.txt")),
+                new InputStreamLineIterator(BookInputStream.getBookInputStream()),
                 new WordCountMapper(),
                 new WordCountReducer(),
                 map::put);

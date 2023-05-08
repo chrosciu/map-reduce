@@ -10,7 +10,7 @@ public class ForkJoinWordCount {
         HashMap<String, Long> map = new HashMap<>();
         MapReduce<String, String, Long> mapReduce = new ForkJoinMapReduce<>();
         mapReduce.run(
-                new InputStreamLineIterator(ForkJoinWordCount.class.getResourceAsStream("/book.txt")),
+                new InputStreamLineIterator(BookInputStream.getBookInputStream()),
                 new WordCountMapper(),
                 new WordCountReducer(),
                 map::put);

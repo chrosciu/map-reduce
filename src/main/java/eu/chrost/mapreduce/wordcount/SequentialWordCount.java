@@ -10,7 +10,7 @@ public class SequentialWordCount {
         HashMap<String, Long> map = new HashMap<>();
         MapReduce<String, String, Long> mapReduce = new SequentialMapReduce<>();
         mapReduce.run(
-                new InputStreamLineIterator(SequentialWordCount.class.getResourceAsStream("/book.txt")),
+                new InputStreamLineIterator(BookInputStream.getBookInputStream()),
                 new WordCountMapper(),
                 new WordCountReducer(),
                 map::put);

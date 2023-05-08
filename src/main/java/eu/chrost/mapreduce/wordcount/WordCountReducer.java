@@ -10,6 +10,7 @@ public final class WordCountReducer implements Reducer<String, Long> {
 
     @Override
     public void reduce(String key, Iterable<Long> values, BiConsumer<String, Long> output) {
-        output.accept(key, StreamSupport.stream(values.spliterator(), false).mapToLong(l -> Optional.ofNullable(l).orElse(0L)).sum());
+        output.accept(key, StreamSupport.stream(values.spliterator(), false)
+                .mapToLong(l -> Optional.ofNullable(l).orElse(0L)).sum());
     }
 }
