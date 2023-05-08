@@ -1,8 +1,8 @@
 package eu.chrost.mapreduce.core;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,13 +52,12 @@ public class ParallelMapReduce<I, K, V> implements MapReduce<I, K, V> {
 
         @Override
         public void run() {
-            mapper.map(input, (k, v) -> results.computeIfAbsent(k, __ -> new LinkedList<>()).add(v));
+            mapper.map(input, (k, v) -> results.computeIfAbsent(k, __ -> new ArrayList<>()).add(v));
         }
     }
 
     @Override
     public void shutdown() {
-        System.out.println("Shutdown");
         executorService.shutdown();
     }
 }
