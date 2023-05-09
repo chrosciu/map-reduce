@@ -1,11 +1,11 @@
 package eu.chrost.mapreduce.core;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,7 +52,9 @@ public class ParallelMapReduce<I, K, V> implements MapReduce<I, K, V> {
 
         @Override
         public void run() {
-            mapper.map(input, (k, v) -> results.computeIfAbsent(k, __ -> new ArrayList<>()).add(v));
+            mapper.map(input, (k, v) -> {
+                results.computeIfAbsent(k, __ -> new ConcurrentLinkedQueue<>()).add(v);
+            });
         }
     }
 

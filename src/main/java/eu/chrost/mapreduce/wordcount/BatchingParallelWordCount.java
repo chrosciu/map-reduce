@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class BatchingParallelWordCount {
     public static void main(String[] args) {
-        MapReduce<String, String, Long> mapReduce = new BatchingParallelMapReduce<>();
-        Map<String, Long> map = WordCountMapReduce.run(mapReduce);
+        MapReduce<String, String, Long> mapReduce = new BatchingParallelMapReduce<>(10000);
+        Map<String, Long> map = WordCountMapReduce.run(mapReduce, BookInputStream.getBookInputStream());
         mapReduce.shutdown();
         System.out.println(map);
     }

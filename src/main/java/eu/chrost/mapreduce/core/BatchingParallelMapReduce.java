@@ -21,7 +21,11 @@ import static java.util.stream.Collectors.reducing;
 public class BatchingParallelMapReduce<I, K, V> implements MapReduce<I, K, V> {
     private final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private final CompletionService<Void> completionService = new ExecutorCompletionService<>(executorService);
-    private final int batchSize = 10000;
+    private final int batchSize;
+
+    public BatchingParallelMapReduce(int batchSize) {
+        this.batchSize = batchSize;
+    }
 
     @Override
     public void run(Iterator<I> input, Mapper<I, K, V> mapper, Reducer<K, V> reducer, BiConsumer<K, V> output) {
