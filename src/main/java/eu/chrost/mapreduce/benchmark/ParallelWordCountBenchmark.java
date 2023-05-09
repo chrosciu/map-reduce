@@ -2,7 +2,7 @@ package eu.chrost.mapreduce.benchmark;
 
 import eu.chrost.mapreduce.core.MapReduce;
 import eu.chrost.mapreduce.core.ParallelMapReduce;
-import eu.chrost.mapreduce.wordcount.BookInputStream;
+import eu.chrost.mapreduce.wordcount.BookInput;
 import eu.chrost.mapreduce.wordcount.WordCountMapReduce;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -34,7 +34,7 @@ public class ParallelWordCountBenchmark {
     @Fork(1)
     @Measurement(iterations = 1)
     public void run(Blackhole blackhole) {
-        Map<String, Long> map = WordCountMapReduce.run(mapReduce, BookInputStream.getBookInputStream());
+        Map<String, Long> map = WordCountMapReduce.run(mapReduce, BookInput.getInput());
         blackhole.consume(map);
     }
 

@@ -1,6 +1,6 @@
 package eu.chrost.mapreduce.benchmark;
 
-import eu.chrost.mapreduce.wordcount.BookInputStream;
+import eu.chrost.mapreduce.wordcount.BookInput;
 import eu.chrost.mapreduce.wordcount.NaiveWordCount;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -19,7 +19,7 @@ public class NaiveWordCountBenchmark {
     @Fork(1)
     @Measurement(iterations = 1)
     public void run(Blackhole blackhole) {
-        Map<String, Long> map = NaiveWordCount.run(BookInputStream.getBookInputStream());
+        Map<String, Long> map = NaiveWordCount.run(BookInput.getInput());
         blackhole.consume(map);
     }
 }

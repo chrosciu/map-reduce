@@ -10,7 +10,7 @@ public class SequentialWordCountTest {
     @Test
     void shouldCountWords() {
         MapReduce<String, String, Long> mapReduce = new SequentialMapReduce<>();
-        Map<String, Long> results = WordCountMapReduce.run(mapReduce, WikiInputStream.getWikiInputStream());
+        Map<String, Long> results = WordCountMapReduce.run(mapReduce, WikiInput.getInput());
         mapReduce.shutdown();
         WordCountAssertions.checkWordCountResults(results);
     }
