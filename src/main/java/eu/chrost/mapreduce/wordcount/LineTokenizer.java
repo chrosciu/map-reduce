@@ -1,13 +1,13 @@
 package eu.chrost.mapreduce.wordcount;
 
-import java.util.StringTokenizer;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 
 public final class LineTokenizer {
+    private static final Pattern PATTERN = Pattern.compile("\\s|\\p{Punct}");
+
     public static void tokenizeLine(String line, Consumer<String> tokenConsumer) {
-        StringTokenizer tokenizer = new StringTokenizer(line, " \t\n\r\f!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
-        while (tokenizer.hasMoreTokens()) {
-            String token = tokenizer.nextToken();
+        for (String token : PATTERN.split(line)) {
             tokenConsumer.accept(token);
         }
     }
