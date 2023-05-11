@@ -7,6 +7,6 @@ import java.util.function.BiConsumer;
 public final class WordCountMapper implements Mapper<String, String, Long> {
     @Override
     public void map(String in, BiConsumer<String, Long> output) {
-        //TODO: Implement
+        LineTokenizer.tokenizeLine(in, str -> output.accept(str, 1L));
     }
 }
