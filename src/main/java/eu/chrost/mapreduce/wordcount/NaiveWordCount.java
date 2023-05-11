@@ -12,7 +12,9 @@ public class NaiveWordCount {
 
     public static Map<String, Long> run(Iterator<String> input) {
         HashMap<String, Long> map = new HashMap<>();
-        //TODO: Implement
+        while (input.hasNext()) {
+            LineTokenizer.tokenizeLine(input.next(), str -> map.merge(str, 1L, Long::sum));
+        }
         return map;
     }
 }
